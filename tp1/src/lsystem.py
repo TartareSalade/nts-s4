@@ -32,7 +32,24 @@ def generation(axiom, rules, n):
     return axiom
     
 def axiomtoline2d(gen : str, p : tuple[float, float], lsys : LSystem2d) -> list[Line]:
-    pass
+
+    """
+    gen : string, where the turtle moove
+    p : tuple[float, float] start position of the turtle
+
+    """
+
+
+    for deplacement in gen:
+        if deplacement == 'F' or deplacement == 'G':
+            #Move forward
+        elif deplacement == '+':
+            #Turn right
+        elif deplacement == '-':
+            #Turn left 
+        elif deplacement == '[':
+    return
+
 
 def axiomtoline3d(gen : str, p : tuple[float, float, float], lsys : LSystem3d) -> list[tuple[Line, int]]:
     pass

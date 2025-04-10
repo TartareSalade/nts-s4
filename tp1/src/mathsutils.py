@@ -80,7 +80,14 @@ def r2d(theta):
     theta : angle in degrees
     return the 2d rotation matrix of angle theta
     """
-    pass
+    
+    M = __mat_init(2,2, 0)
+    M[0][0] = cos(degreetorad(theta))
+    M[0][1] = -sin(degreetorad(theta))
+    M[1][0] = sin(degreetorad(theta))
+    M[1][1] = cos(degreetorad(theta))
+
+    return M
 
 def move2d(x, y, r, d):
     """
@@ -89,7 +96,10 @@ def move2d(x, y, r, d):
     d : distance
     return the new coordinates
     """
-    pass
+
+    vec = [[d], [0]]
+    matrice_mult = multmat(r, vec)
+    return (x + matrice_mult[0][0], y + matrice_mult[1][0])
     
 def ru3d(theta):
     """
