@@ -4,6 +4,7 @@ from drawing.line import Line
 from lsystems.lsystem2d import *
 from lsystems.lsystem3d import *
 import random
+from turtle import *
 
 def derivation(axiom, rules):
     """
@@ -39,16 +40,33 @@ def axiomtoline2d(gen : str, p : tuple[float, float], lsys : LSystem2d) -> list[
 
     """
 
+    stack = []
+    position = tuple
 
     for deplacement in gen:
         if deplacement == 'F' or deplacement == 'G':
+            rotation_matrice = r2d(lsys.init_angle)
+            new_position = move2d(tuple[0], tuple[1], rotation_matrice, lsys.d)
+            new_line = Line(tuple, new_position)
+            forward(lsys.d)
+            stack.append(new_line)
+            position = new_position
+
             #Move forward
         elif deplacement == '+':
+            right(90)
             #Turn right
         elif deplacement == '-':
-            #Turn left 
+            #Turn left
+            left(90)
         elif deplacement == '[':
-    return
+            #Save the position on the stack
+            stack.append((lsys.x0, lsys.y0))
+        elif deplacement == ']':
+
+
+
+    return stack
 
 
 def axiomtoline3d(gen : str, p : tuple[float, float, float], lsys : LSystem3d) -> list[tuple[Line, int]]:
