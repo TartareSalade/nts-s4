@@ -33,41 +33,33 @@ def generation(axiom, rules, n):
     return axiom
     
 def axiomtoline2d(gen : str, p : tuple[float, float], lsys : LSystem2d) -> list[Line]:
-
     """
-    gen : string, where the turtle moove
+    gen : string, where the turtle moves
     p : tuple[float, float] start position of the turtle
-
     """
-
     stack = []
-    position = tuple
+    lines = []
+    position = p 
+    angle = lsys.l_angle
 
     for deplacement in gen:
         if deplacement == 'F' or deplacement == 'G':
-            rotation_matrice = r2d(lsys.init_angle)
-            new_position = move2d(tuple[0], tuple[1], rotation_matrice, lsys.d)
-            new_line = Line(tuple, new_position)
-            forward(lsys.d)
-            stack.append(new_line)
+            rotation_matrix = r2d(lsys.l_angle)
+            new_position = move2d(position[0], position[1], rotation_matrix , lsys.d)
+            line = Line(position, new_position)
+            lines.append(line)
             position = new_position
-
-            #Move forward
         elif deplacement == '+':
-            right(90)
-            #Turn right
+            angle += lsys.l_angle
         elif deplacement == '-':
-            #Turn left
-            left(90)
+            angle += lsys.r_angle
         elif deplacement == '[':
-            #Save the position on the stack
-            stack.append((lsys.x0, lsys.y0))
+            stack.append((position, angle))
         elif deplacement == ']':
+            if stack:
+                position, angle = stack.pop()
 
-
-
-    return stack
-
+    return lines
 
 def axiomtoline3d(gen : str, p : tuple[float, float, float], lsys : LSystem3d) -> list[tuple[Line, int]]:
     pass
